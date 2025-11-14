@@ -13,4 +13,4 @@ const RecipeExcerpt = ({ recipe, handleSelectRecipe }) => {
     )
 }
 
-export default RecipeExcerpt
+export default RecipeExcerpt;
