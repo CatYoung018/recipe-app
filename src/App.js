@@ -10,6 +10,7 @@ function App() {
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [showNewRecipeForm, setShowNewRecipeForm] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
 const [newRecipe, setNewRecipe] = useState({
   title: "",
@@ -158,9 +159,27 @@ useEffect(() => {
     }
   };
   
+  const updateSearchTerm = (text) => {
+    setSearchTerm(text);
+  };
+
+  const handleSearch = () => {
+    const searchResults = recipes.filter((recipe) => {
+      const valuesToSearch = [recipe.title, recipe.ingredients, recipe.instructions, recipe.description];
+      return valuesToSearch.some((value) => value.toLowerCase().includes(searchTerm.toLowerCase()));
+    })
+    return searchResults;
+  };
+
+  const displayedRecipes = searchTerm ? handleSearch() : recipes;
+
   return (
     <div className='recipe-app'>
-      <Header showRecipeForm={showRecipeForm} />
+      <Header 
+        showRecipeForm={showRecipeForm}
+        updateSearchTerm={updateSearchTerm}
+        searchTerm={searchTerm}
+      />
 
       {showNewRecipeForm && (
         <NewRecipeForm
@@ -183,7 +202,7 @@ useEffect(() => {
 
       {!selectedRecipe && !showNewRecipeForm && (
         <div className='recipe-list'>
-          {recipes.map((recipe) => (
+          {displayedRecipes.map((recipe) => (
             <RecipeExcerpt key={recipe.id} recipe={recipe} handleSelectRecipe={handleSelectRecipe} />
           ))}
         </div>
