@@ -207,13 +207,6 @@ This project is open source and available for educational purposes.
 
 ---
 
-## 👏 Acknowledgments
-
-- Built as part of a full-stack web development learning journey
-- Thanks to my instructor [Lisa Savoie](https://github.com/twosavoie) for guidance and support
-
----
-
 ## 📧 Contact
 
 **Cat Young**  
